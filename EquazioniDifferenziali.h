@@ -90,10 +90,11 @@ void AdaptiveEulero(double (*f)(double, double, double, double*), double (*g)(do
 	{
 		yprec = y;
 		xprec = x;
-		double x1 = x + h * f(t,x, y,args);
-		double x2 = x + h * f(t+h, x1, y, args);
-		double y1 = y + h * g(t, xprec, y, args);
-		double y2 = y + h * g(t + h, xprec, y1, args);
+		x1 = x + h * f(t, x, y, args);
+                y1 = y + h * g(t, x, y, args);
+                x2 = x + h * f(t + h, x1, y, args);
+                y2 = y + h * g(t + h, x1, y1, args);
+
 		if (isnan(x1) || isnan(x2) || isnan(y1) || isnan(y2))
 		{
 			h /= 2;
